@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using RazorPagesCore30.Models;
 
 namespace RazorPagesCore30
 {
@@ -35,6 +37,9 @@ namespace RazorPagesCore30
 
             services.AddMvc()
                 .AddNewtonsoftJson();
+
+            services.AddDbContext<RazorPagesCore30Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("RazorPagesCore30Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
